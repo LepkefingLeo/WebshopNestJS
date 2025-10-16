@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Megrendelés</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
+    integrity="sha384-CfCrinSRH2IR6a4e6fy2q6ioOX7O6Mtm1L9vRvFZ1trBncWmMePhzvafv7oIcWiW" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Megrendelési űrlap</h1>
+    <% if (errors && errors.length) { %>
+      <div class="alert alert-danger">
+        <% errors.forEach(e=> { %>
+          <p>
+            <%= e %>
+          </p>
+          <% }) %>
+      </div>
+      <% } %>
+        <form method="post" action="/order">
+          <input type="hidden" name="productId" value="<%= form.productId || '' %>">
+
+          <div class="mb-3">
+            <label class="form-label">Név: <input name="name" class="form-control" value="<%= form.name || '' %>"></label>
+          </div>
+
+          <h3>Számlázási cím</h3>
+          <div class="mb-3">
+            <input name="billingCountry" class="form-control" placeholder="Ország" value="<%= form.billingCountry || '' %>">
+          </div>
+          <div class="mb-3">
+            <input name="billingZip" class="form-control" placeholder="Irányítószám" value="<%= form.billingZip || '' %>">
+          </div>
+          <div class="mb-3">
+            <input name="billingCity" class="form-control" placeholder="Város" value="<%= form.billingCity || '' %>">
+          </div>
+          <div class="mb-3">
+            <input name="billingStreet" class="form-control" placeholder="Utca, házszám" value="<%= form.billingStreet || '' %>">
+          </div>
+
+          <h3>Szállítási cím</h3>
+          <div class="mb-3">
+            <input name="shippingCountry" class="form-control" placeholder="Ország" value="<%= form.shippingCountry || '' %>">
+          </div>
+          <div class="mb-3">
+            <input name="shippingZip" class="form-control" placeholder="Irányítószám" value="<%= form.shippingZip || '' %>">
+          </div>
+          <div class="mb-3">
+            <input name="shippingCity" class="form-control" placeholder="Város" value="<%= form.shippingCity || '' %>">
+          </div>
+          <div class="mb-3">
+            <input name="shippingStreet" class="form-control" placeholder="Utca, házszám" value="<%= form.shippingStreet || '' %>">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Kuponkód: <input name="coupon" class="form-control" value="<%= form.coupon || '' %>"></label>
+          </div>
+
+          <h3>Fizetés</h3>
+          <div class="mb-3">
+            <label class="form-label">Kártyaszám: <input name="cardNumber" class="form-control"
+                placeholder="XXXX-XXXX-XXXX-XXXX"></label>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Lejárat: <input name="expiry" class="form-control" placeholder="HH/ÉÉ"></label>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">CVC: <input name="cvc" class="form-control" placeholder="CVC"></label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Megrendelés leadása</button>
+        </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5n9nH9z8j9m5W8j5J+OWQ6pq9vJzzW5n9i5N5E9"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
