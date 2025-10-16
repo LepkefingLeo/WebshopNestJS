@@ -14,6 +14,6 @@ async function bootstrap() {
   app.setViewEngine('ejs');
 
   await app.listen(process.env.PORT ?? 3000);
-  console.log('✅ Webshop fut: http://localhost:3000');
+  console.log('✅ Webshop fut, PORT:3000');
 }
 void bootstrap();

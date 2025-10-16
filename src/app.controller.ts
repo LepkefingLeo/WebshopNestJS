@@ -2,8 +2,6 @@ import { Controller, Get, Query, Render, Post, Body, Res } from '@nestjs/common'
 import { AppService } from './app.service';
 import type { Response } from 'express';
 import { CreateOrderDto } from './order.dto';
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 
 @Controller()
 export class ProductsController {
@@ -20,13 +18,13 @@ export class ProductsController {
   getOrder(@Query('productId') productId: string) {
     const product = this.appService.getProductById(Number(productId));
     if (!product) {
-      return { form: {}, errors: ['Product not found'] };
+      return { form: {}, errors: ['Termék nem található!'] };
     }
 
     return { form: { productId: product.id }, errors: [], product };
   }
 
-  @Get('order-success')
+  @Get('success')
   @Render('success')
   getOrderSuccess(@Query('name') name: string) {
     return { name: name };
@@ -92,15 +90,6 @@ export class ProductsController {
       return res.render('order', { errors, form: formData, product });
     }
 
-    return res.redirect(`/order-success?name=${body.name}`);
+    return res.redirect(`/success?name=${body.name}`);
   }
 }
-
-@Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true,
-  })],
-  controllers: [ProductsController],
-  providers: [AppService],
-})
-export class AppModule {}
